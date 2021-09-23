@@ -1,0 +1,146 @@
+# i3 config file (v4)
+
+#============BEHAVIOUR============#
+set $mod Mod4
+
+set $cMain "#07a3e6"
+set $cDarkMain "#074964"
+set $cLightBack "#042a3a"
+set $cBack "#010c11"
+set $cDarkBack "#000000"
+
+#Define workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
+
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+a focus parent
+
+# move focused window
+bindsym $mod+Shift+j move left 100px
+bindsym $mod+Shift+k move down 100px
+bindsym $mod+Shift+l move up 100px
+bindsym $mod+Shift+colon move right 100px
+
+# resize window
+bindsym $mod+Left resize shrink width 45 px
+bindsym $mod+Right resize grow width 45 px
+bindsym $mod+Up resize grow height 45 px
+bindsym $mod+Down resize shrink height 45 px
+
+# pick new containers side
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# change container layout
+bindsym $mod+Shift+h layout tabbed
+bindsym $mod+Shift+v layout stacked
+bindsym $mod+Shift+s layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status  #not sure what this does 
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# disable mouse warping to other monitor
+mouse_warping none 
+
+#============STYLE============#
+font pango:monospace 10
+
+bar {
+		status_command exec ~/.config/i3/sweet-i3bar/driver.sh
+		position bottom
+		separator_symbol "/"
+
+		colors{
+			background $cDarkBack
+			separator  $cLightBack
+			#                 outline inside    number
+			focused_workspace $cMain $cLightBack $cMain
+			active_workspace $cMain $cBack $cMain
+      inactive_workspace $cBack $cBack $cMain
+		}
+}
+
+default_border pixel 5
+default_floating_border normal 2
+hide_edge_borders smart  #hide edge borders in fullscreen mode
+
+#                       textbord      backgr.    text        indicator border
+client.focused          $cMain        $cBack     $cMain      $cMain   $cMain
+client.focused_inactive $cMain        $cBack     $cMain      $cBack   $cBack
+client.unfocused        $cDarkMain    #000000    $cDarkMain  $cBack   $cBack
+client.urgent           #ffff00       #000000    $cLightBack $cBack   #ffff00
+client.placeholder      #aa0000       #000000    $cLightBack $cBack   #ff00ff
+client.background                     $cDarkBack
+
+#===========AFTER BOOT===========#
+exec feh --bg-fill /home/*/.config/background-image*
+exec guake
+exec xfce4-power-manager
+exec nm-tray
+
+#============BINDINGS============#
+bindsym $mod+d       exec dmenu_run -sf "#ffffff" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
+bindsym Print        exec flameshot gui
+bindsym $mod+t       exec st -f "iosevka\-splendid:size=11.5"
+
+bindsym $mod+Shift+q kill
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Shift+r restart  # restart i3
+
+exec setxkbmap -layout us,ru && setxkbmap -option 'grp:menu_toggle'
+#'grp:sclk_toggle'
+
+bindsym $mod+x exec ~/do.sh
