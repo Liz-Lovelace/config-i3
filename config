@@ -45,6 +45,17 @@ bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $
 bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
 
+# touchpad settings
+
+# get this from xinput --list
+set $pad "ETPS/2 Elantech Touchpad"
+
+# get these from xinput --list-props {touchpad id from xinput --list}
+exec xinput set-prop $pad "libinput Tapping Enabled" 1
+exec xinput set-prop $pad "libinput Accel Speed" 0.3
+# first is two-finger scrolling, then side scrolling, then button scrolling
+exec xinput set-prop $pad "libinput Scroll Method Enabled" 0, 0, 0
+
 
 # change focus
 bindsym $mod+j focus left
