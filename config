@@ -54,7 +54,7 @@ set $pad "ETPS/2 Elantech Touchpad"
 exec xinput set-prop $pad "libinput Tapping Enabled" 1
 exec xinput set-prop $pad "libinput Accel Speed" 0.3
 # first is two-finger scrolling, then side scrolling, then button scrolling
-exec xinput set-prop $pad "libinput Scroll Method Enabled" 0, 0, 0
+exec xinput set-prop $pad "libinput Scroll Method Enabled" 1, 0, 0
 
 
 # change focus
