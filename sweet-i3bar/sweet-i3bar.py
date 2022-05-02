@@ -1,9 +1,14 @@
+import json
 from datetime import datetime, date
+import time
 from getpass import getuser
 from socket import gethostname
 import psutil
 import re
 from subprocess import check_output
+import sys
+sys.path.append(sys.path[0] + '/../domodoro')
+import domodoro as domodoro_api
 
 def exec(cmd):
   return check_output(cmd.split(' ')).decode()
@@ -78,7 +83,18 @@ def battery(batteryHealthMode=False):
   out = str(level) + '%'+ ' ' + bar
   return block(out, color)
 
+def domodoro():
+  status = domodoro_api.tick()
+  if (status['timer_timestamp'] == None) or (status['title'] == None) or (status['type'] == 'off'):
+    return block('off', '#ffff00')
+  title = status['title']
+  elapsed = float(status['timer_timestamp']) - datetime.now().timestamp()
+  if elapsed < 0:
+    return block(f'{title} {int(elapsed/60) * -1} min ago', '#ffff00')
+  return block(f'{title} {int(elapsed / 60)}:{int(elapsed % 60):>02}', '#ffff00')
+  
 blocks = [
+  domodoro(),
   user(), 
   mem(),
   battery(batteryHealthMode=True),

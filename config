@@ -149,6 +149,7 @@ bindsym $mod+t       exec st -f "iosevka\-splendid:size=11.5"
 bindsym $mod+F2      exec setxkbmap ru
 bindsym $mod+F1      exec setxkbmap us
 bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
+bindsym $mod+p       exec python3 ~/.config/i3/domodoro/domodoro.py
 
 bindsym $mod+Shift+q kill
 
