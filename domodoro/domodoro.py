@@ -42,6 +42,7 @@ def process_status(status):
 
   elapsed = time() - status['timer_timestamp']
   if elapsed > 0:
+    check_output(['notify-send', '-t', '3000', f'Finished timer {status["title"]}'])
     if status['type'] == 'work':
       play_sound('coin.mp3')
       write_status(default_status)
