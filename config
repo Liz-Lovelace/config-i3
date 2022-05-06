@@ -145,7 +145,7 @@ exec nm-tray
 #============BINDINGS============#
 bindsym $mod+d       exec dmenu_run -sf "#ffffff" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
 bindsym Print        exec flameshot gui
-bindsym $mod+t       exec st -f "iosevka\-splendid:size=11.5"
+bindsym $mod+t       exec alacritty
 bindsym $mod+F2      exec setxkbmap ru
 bindsym $mod+F1      exec setxkbmap us
 bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
