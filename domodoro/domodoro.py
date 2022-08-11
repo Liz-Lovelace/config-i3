@@ -29,6 +29,8 @@ def read_status():
   status = None
   with open(status_path, 'r+') as f:
     status = f.read()
+  if status.strip() == '':
+    write_status(default_status)
   return json.loads(status)
 
 def write_status(status):
@@ -96,9 +98,9 @@ if __name__ == '__main__':
   options = '\n'.join(options)
   cmd = check_output(['dmenu', '-b', '-nb', '#000', '-sb', '#FF0', '-nf', '#FFF', '-sf', '#000'], text=True, input=options).strip()
   if cmd == 'work':
-    start_timer(25, 'work')
+    start_timer(23, 'work')
   elif cmd == 'break':
-    start_timer(5, 'break')
+    start_timer(8, 'break')
   elif cmd == 'long break':
     start_timer(25, 'long break')
   elif cmd == 'cancel':
