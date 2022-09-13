@@ -45,6 +45,8 @@ bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $
 bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
 
+bindsym $mod+Shift+w move workspace to output next
+
 # get this from xinput --list
 set $touchpad "SynPS/2 Synaptics TouchPad"
 set $trackpoint "TPPS/2 IBM TrackPoint"
