@@ -1,6 +1,5 @@
 # i3 config file (v4)
 
-#============BEHAVIOUR============#
 set $mod Mod4
 
 set $cMain "#E60012"
@@ -45,7 +44,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $
 bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
 
-bindsym $mod+Shift+w move workspace to output next
+bindsym $mod+Shift+u move workspace to output next
 
 # get this from xinput --list
 set $touchpad "SynPS/2 Synaptics TouchPad"
@@ -73,6 +72,10 @@ bindsym $mod+Shift+j move left 100px
 bindsym $mod+Shift+k move down 100px
 bindsym $mod+Shift+l move up 100px
 bindsym $mod+Shift+colon move right 100px
+
+# swap focused container
+bindsym $mod+Shift+i mark swap_mark
+bindsym $mod+Shift+o swap container with mark swap_mark; unmark swap_mark;
 
 # resize window
 bindsym $mod+Left resize shrink width 45 px
@@ -105,23 +108,22 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# disable mouse warping to other monitor
-mouse_warping none 
+# disable mouse teleportation when focus changes to other monitor
+mouse_warping none
 
-#============STYLE============#
 font pango:monospace 10
 
 bar {
-		status_command exec ~/.config/i3/sweet-i3bar/driver.sh
-		position bottom
-		separator_symbol "/"
+    status_command exec ~/.config/i3/sweet-i3bar/driver.sh
+    position bottom
+    separator_symbol "/"
 
 		colors{
 			background $cDarkBack
 			separator  $cLightBack
-			#                 outline inside    number
-			focused_workspace $cMain $cLightBack $cMain
-			active_workspace $cMain $cBack $cMain
+			#                  outline inside    number
+      focused_workspace  $cMain $cLightBack $cMain
+      active_workspace   $cMain $cBack $cMain
       inactive_workspace $cBack $cBack $cMain
 		}
 }
@@ -129,7 +131,9 @@ bar {
 # force all windows to have a border
 for_window [class=.*] border pixel 5
 default_floating_border normal 2
-hide_edge_borders smart  #hide edge borders in fullscreen mode
+hide_edge_borders smart  # hide edge borders in fullscreen mode
+
+title_align center
 
 #                       textbord      backgr.    text        indicator border
 client.focused          $cMain        $cBack     $cMain      $cMain   $cMain
@@ -140,22 +144,25 @@ client.placeholder      #aa0000       #000000    $cLightBack $cBack   #ff00ff
 client.background                     $cDarkBack
 
 #===========AFTER BOOT===========#
-exec feh --bg-fill /home/*/.config/background-image*
+exec feh --bg-fill /home/*/.config/background*
 exec guake
 exec xfce4-power-manager
 exec nm-tray
 
 #============BINDINGS============#
 bindsym $mod+d       exec dmenu_run -sf "#ffffff" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
+bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
+bindsym $mod+p       exec python3 ~/.config/i3/domodoro/domodoro.py
 bindsym Print        exec flameshot gui
 bindsym $mod+t       exec alacritty
 bindsym $mod+F2      exec setxkbmap ru
 bindsym $mod+F1      exec setxkbmap us
-bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
-bindsym $mod+p       exec python3 ~/.config/i3/domodoro/domodoro.py
 
 bindsym $mod+Shift+q kill
 
 bindsym $mod+f fullscreen toggle
 
 bindsym $mod+Shift+r restart  # restart i3
+
+#======CUSTOM WINDOW COMMANDS======#
+for_window [class="mpv"] fullscreen enable
