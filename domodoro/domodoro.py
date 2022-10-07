@@ -4,6 +4,10 @@ import sys
 from time import time, sleep
 import os
 
+work_minutes = 25
+break_minutes = 15
+long_break_minutes = 20
+
 status_path = '/tmp/domodoro.json'
 
 def play_sound(sound_name):
@@ -98,11 +102,11 @@ if __name__ == '__main__':
   options = '\n'.join(options)
   cmd = check_output(['dmenu', '-b', '-nb', '#000', '-sb', '#FF0', '-nf', '#FFF', '-sf', '#000'], text=True, input=options).strip()
   if cmd == 'work':
-    start_timer(23, 'work')
+    start_timer(work_minutes, 'work')
   elif cmd == 'break':
-    start_timer(8, 'break')
+    start_timer(break_minutes, 'break')
   elif cmd == 'long break':
-    start_timer(25, 'long break')
+    start_timer(long_break_minutes, 'long break')
   elif cmd == 'cancel':
     write_status(default_status)
   else:
