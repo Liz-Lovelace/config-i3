@@ -52,7 +52,7 @@ set $trackpoint "TPPS/2 IBM TrackPoint"
 
 # get these from xinput --list-props {touchpad id from xinput --list}
 exec xinput set-prop $touchpad "libinput Tapping Enabled" 1
-exec xinput set-prop $touchpad "libinput Accel Speed" 0.3
+exec xinput set-prop $touchpad "libinput Accel Speed" 0.4
 
 # first is two-finger scrolling, then side scrolling, then button scrolling
 exec xinput set-prop $touchpad "libinput Scroll Method Enabled" 1, 0, 0
