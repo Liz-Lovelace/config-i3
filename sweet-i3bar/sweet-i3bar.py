@@ -95,10 +95,9 @@ def domodoro():
   
 blocks = [
   domodoro(),
-  user(), 
+#  user(), 
   mem(),
-  battery(batteryHealthMode=True),
-  deadline(),
+  battery(batteryHealthMode=False),
   longDate(),
   time(seconds=False), 
 ]
