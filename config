@@ -66,17 +66,17 @@ exec xinput set-prop $trackpoint "libinput Accel Speed" -0.5
 
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 bindsym $mod+a focus parent
 
 # move focused window
-bindsym $mod+Shift+j move left 100px
-bindsym $mod+Shift+k move down 100px
-bindsym $mod+Shift+l move up 100px
-bindsym $mod+Shift+colon move right 100px
+bindsym $mod+Shift+h move left 100px
+bindsym $mod+Shift+j move down 100px
+bindsym $mod+Shift+k move up 100px
+bindsym $mod+Shift+l move right 100px
 
 # swap focused container
 bindsym $mod+Shift+i mark swap_mark
@@ -89,11 +89,11 @@ bindsym $mod+Up resize grow height 45 px
 bindsym $mod+Down resize shrink height 45 px
 
 # pick new containers side
-bindsym $mod+h split h
+bindsym $mod+c split h
 bindsym $mod+v split v
 
 # change container layout
-bindsym $mod+Shift+h layout tabbed
+bindsym $mod+Shift+c layout tabbed
 bindsym $mod+Shift+v layout stacked
 bindsym $mod+Shift+s layout toggle split
 
