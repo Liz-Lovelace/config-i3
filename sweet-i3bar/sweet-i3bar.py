@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import time
 from getpass import getuser
 from socket import gethostname
@@ -27,6 +27,11 @@ def time(seconds = False):
   now = datetime.now()
   currentTime = now.strftime(' %-H:%M' + (':%S' if seconds else '') + '  ')
   return block(currentTime)
+
+def othertime(seconds = False):
+  now = datetime.now() - timedelta(hours=13)
+  currentTime = now.strftime(' %-H:%M' + (':%S' if seconds else '') + '  ')
+  return block(currentTime, '#aaaaaa')
 
 def longDate():
   now = datetime.now()
@@ -99,6 +104,7 @@ blocks = [
   mem(),
   battery(batteryHealthMode=False),
   longDate(),
+  othertime(seconds=False),
   time(seconds=False), 
 ]
 
