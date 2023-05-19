@@ -28,10 +28,10 @@ def time(seconds = False):
   currentTime = now.strftime(' %-H:%M' + (':%S' if seconds else '') + '  ')
   return block(currentTime)
 
-def othertime(seconds = False):
-  now = datetime.now() - timedelta(hours=13)
-  currentTime = now.strftime(' %-H:%M' + (':%S' if seconds else '') + '  ')
-  return block(currentTime, '#aaaaaa')
+def othertime(seconds = False, offset = 0, title=''):
+  now = datetime.now() - timedelta(hours=offset)
+  currentTime = now.strftime('%-H:%M' + (':%S' if seconds else '') + '  ')
+  return block(f'{title} {currentTime}', '#aaaaaa')
 
 def longDate():
   now = datetime.now()
@@ -104,7 +104,8 @@ blocks = [
   mem(),
   battery(batteryHealthMode=False),
   longDate(),
-  othertime(seconds=False),
+  othertime(seconds=False, offset=13, title='west'),
+  othertime(seconds=False, offset=5, title='uk'),
   time(seconds=False), 
 ]
 
