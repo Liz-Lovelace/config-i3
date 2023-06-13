@@ -99,7 +99,7 @@ def domodoro():
   return block(f'{title} {int(elapsed / 60)}:{int(elapsed % 60):>02}', '#ffff00')
   
 blocks = [
-#  domodoro(),
+  domodoro(),
 #  user(), 
   mem(),
   battery(batteryHealthMode=False),
