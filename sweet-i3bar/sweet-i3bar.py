@@ -91,7 +91,7 @@ def battery(batteryHealthMode=False):
 def domodoro():
   status = domodoro_api.tick()
   if (status['timer_timestamp'] == None) or (status['title'] == None) or (status['type'] == 'off'):
-    return block('off', '#ffff00')
+    return block('off', '#0000ff')
   title = status['title']
   elapsed = float(status['timer_timestamp']) - datetime.now().timestamp()
   if elapsed < 0:
