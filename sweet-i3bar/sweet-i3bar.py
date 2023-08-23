@@ -35,7 +35,7 @@ def othertime(seconds = False, offset = 0, title=''):
 
 def longDate():
   now = datetime.now()
-  currentDate = now.strftime('%A, %B %-d  (%d.%m.%-y)')
+  currentDate = now.strftime('%A, %B %-d  (%d.%m.%-Y)')
   return block(currentDate, '#ea9635')
 
 def user():
@@ -105,7 +105,6 @@ blocks = [
   battery(batteryHealthMode=False),
   longDate(),
   othertime(seconds=False, offset=13, title='west'),
-  othertime(seconds=False, offset=5, title='uk'),
   time(seconds=False), 
 ]
 

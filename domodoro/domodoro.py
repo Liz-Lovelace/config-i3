@@ -4,9 +4,9 @@ import sys
 from time import time, sleep
 import os
 
-work_minutes = 45
-break_minutes = 15
-long_break_minutes = 30
+work_minutes = 25
+break_minutes = 10
+long_break_minutes = 20
 
 status_path = '/tmp/domodoro.json'
 
