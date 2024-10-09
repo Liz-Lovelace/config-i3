@@ -2,10 +2,10 @@
 
 set $mod Mod4
 
-set $cMain "#E60012"
-set $cDarkMain "#9d000e"
-set $cLightBack "#64040c"
-set $cBack "#3c0005"
+set $cMain "#00dd00"
+set $cDarkMain "#009d00"
+set $cLightBack "#006400"
+set $cBack "#003c00"
 set $cDarkBack "#000000"
 
 #Define workspaces
@@ -64,6 +64,8 @@ exec xinput set-prop $touchpad "libinput Scroll Method Enabled" 1, 0, 0
 
 exec xinput set-prop $trackpoint "libinput Accel Speed" -0.5
 
+# make keys repeat faster when held down when held downaaaaaa
+exec xset r rate 220 20
 
 # change focus
 bindsym $mod+h focus left
@@ -134,7 +136,7 @@ bar {
 }
 
 # force all windows to have a border
-for_window [class=.*] border pixel 5
+for_window [class=.*] border pixel 3
 default_floating_border normal 2
 hide_edge_borders smart  # hide edge borders in fullscreen mode
 
@@ -153,15 +155,18 @@ exec feh --bg-fill /home/*/.config/background*
 exec guake
 exec xfce4-power-manager
 exec nm-tray
+exec shrinkDisplay.sh
 
 #============BINDINGS============#
-bindsym $mod+d       exec dmenu_run -sf "#ffffff" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
+bindsym $mod+d       exec dmenu_run -sf "#000000" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
 bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
 bindsym $mod+p       exec python3 ~/.config/i3/domodoro/domodoro.py
 bindsym Print        exec flameshot gui
 bindsym $mod+t       exec alacritty
 bindsym $mod+F2      exec setxkbmap ru
 bindsym $mod+F1      exec setxkbmap us
+
+bindsym F12          nop
 
 bindsym $mod+Shift+q kill
 
@@ -171,3 +176,5 @@ bindsym $mod+Shift+r restart  # restart i3
 
 #======CUSTOM WINDOW COMMANDS======#
 for_window [class="mpv"] fullscreen enable
+
+

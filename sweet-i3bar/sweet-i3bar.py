@@ -104,7 +104,7 @@ blocks = [
   mem(),
   battery(batteryHealthMode=False),
   longDate(),
-  othertime(seconds=False, offset=13, title='west'),
+  othertime(seconds=False, offset=12, title='west'),
   time(seconds=False), 
 ]
 
