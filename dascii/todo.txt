@@ -1,0 +1,7 @@
+TODO:
+- [x] g t/b/l/r/v/h for line-graph
+- [x] dmenu integration
+- [-] c{col}{bg} for linux color wrapper
+- [x] useful icons
+- [x] documentation in dmenu
+- [-] rename to demmet

@@ -160,6 +160,7 @@ exec nm-tray
 bindsym $mod+d       exec dmenu_run -sf "#000000" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
 bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
 bindsym $mod+p       exec python3 ~/.config/i3/domodoro/domodoro.py
+bindsym $mod+e       exec node    ~/.config/i3/dascii/dascii.js
 bindsym Print        exec flameshot gui
 bindsym $mod+t       exec alacritty
 bindsym $mod+F2      exec setxkbmap ru
