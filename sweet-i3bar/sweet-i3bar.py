@@ -105,6 +105,7 @@ blocks = [
   battery(batteryHealthMode=False),
   longDate(),
   othertime(seconds=False, offset=12, title='west'),
+  othertime(seconds=False, offset=3, title='fab'),
   time(seconds=False), 
 ]
 
