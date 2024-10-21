@@ -52,17 +52,15 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Shift+u move workspace to output next
 
 # get this from xinput --list
-set $touchpad "SynPS/2 Synaptics TouchPad"
-set $trackpoint "TPPS/2 IBM TrackPoint"
+set $touchpad "ELAN0001:00 04F3:327E Touchpad"
 
 # get these from xinput --list-props {touchpad id from xinput --list}
 exec xinput set-prop $touchpad "libinput Tapping Enabled" 1
-exec xinput set-prop $touchpad "libinput Accel Speed" 0.4
+exec xinput set-prop $touchpad "libinput Accel Speed" 0.5
+# exec xinput set-prop $touchpad "libinput Middle Emulation Enabled" 1
 
 # first is two-finger scrolling, then side scrolling, then button scrolling
 exec xinput set-prop $touchpad "libinput Scroll Method Enabled" 1, 0, 0
-
-exec xinput set-prop $trackpoint "libinput Accel Speed" -0.5
 
 # make keys repeat faster when held down when held downaaaaaa
 exec xset r rate 220 20
@@ -115,6 +113,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+bindsym $mod+F5 exec sudo brightnessctl --class backlight s 10%-
+bindsym $mod+F6 exec sudo brightnessctl --class backlight s 10%+
+
 # disable mouse teleportation when focus changes to other monitor
 mouse_warping none
 
@@ -152,10 +153,8 @@ client.background                     $cDarkBack
 
 #===========AFTER BOOT===========#
 exec feh --bg-fill /home/*/.config/background*
-exec guake
-exec xfce4-power-manager
+# exec xfce4-power-manager
 exec nm-tray
-exec shrinkDisplay.sh
 
 #============BINDINGS============#
 bindsym $mod+d       exec dmenu_run -sf "#000000" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
