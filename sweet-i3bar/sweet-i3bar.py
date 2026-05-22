@@ -22,26 +22,39 @@ def block(text, color = '#ffffff'):
   res += '}' 
   return res
 
-
 def time(seconds = False):
   now = datetime.now()
-  currentTime = now.strftime(' %-H:%M' + (':%S' if seconds else '') + '  ')
+  currentTime = now.strftime(' %-H:%M' + (':%S' if seconds else '') + ' ')
   return block(currentTime)
 
 def othertime(seconds = False, offset = 0, title=''):
   now = datetime.now() - timedelta(hours=offset)
-  currentTime = now.strftime('%-H:%M' + (':%S' if seconds else '') + '  ')
-  return block(f'{title} {currentTime}', '#aaaaaa')
+  currentTime = now.strftime('%-H:%M' + (':%S' if seconds else ''))
+  return block(f' {title} {currentTime} ', '#aaaaaa')
 
 def longDate():
   now = datetime.now()
-  currentDate = now.strftime('%A, %B %-d  (%d.%m.%-Y)')
+  currentDate = now.strftime('%A, %B %-d  (%-Y-%m-%d)')
   return block(currentDate, '#ea9635')
 
 def user():
   name = getuser()
   host = gethostname()
   return block(name + ' ('+ host+')')
+
+def temp():
+  temp = open('/sys/class/thermal/thermal_zone0/temp', 'r').read()
+  temp = int(temp) / 1000
+  color = '#ffffff'
+  if (temp > 70):
+    color = '#ff0000'
+  elif (temp > 60):
+    color = '#ffaa00'
+  elif (temp > 50):
+    color = '#ffffff'
+  else:
+    color = '#00ff00'
+  return block(str(temp) + 'C', color)
 
 def mem():
   mem = psutil.virtual_memory()
@@ -65,9 +78,21 @@ def deadline():
 
 def battery(batteryHealthMode=False):
   acpi = exec('acpi -b')
+  acpi_entries = acpi.split('\n')
+  if len(acpi_entries[0]) == 0:
+    acpi = acpi_entries[1]
+  else:
+    acpi = acpi_entries[0]
+
   if len(acpi) == 0:
-    return block('')
+    return block('battery not found')
+
   level = int(re.search(', (\d?\d?\d)%', acpi).group(1))
+
+  if level == 0:
+    acpi = acpi_entries[1]
+    level = int(re.search(', (\d?\d?\d)%', acpi).group(1))
+
   color = '#00ff00'
   
   #batteryHealthMode keeps the battery level between 20% and 80%
@@ -101,11 +126,15 @@ def domodoro():
 blocks = [
   domodoro(),
 #  user(), 
+  temp(),
   mem(),
   battery(batteryHealthMode=False),
   longDate(),
-  othertime(seconds=False, offset=12, title='west'),
+  othertime(seconds=False, offset=12, title='us-west'),
+  othertime(seconds=False, offset=9, title='us-east'),
+  othertime(seconds=False, offset=5, title='utc'),
   othertime(seconds=False, offset=3, title='fab'),
+  othertime(seconds=False, offset=2, title='moscow'),
   time(seconds=False), 
 ]
 

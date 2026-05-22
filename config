@@ -2,23 +2,23 @@
 
 set $mod Mod4
 
-set $cMain "#00dd00"
-set $cDarkMain "#009d00"
-set $cLightBack "#006400"
-set $cBack "#003c00"
+set $cMain "#ffffff"
+set $cDarkMain "#888888"
+set $cLightBack "#333333"
+set $cBack "#191919"
 set $cDarkBack "#000000"
 
 #Define workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
+set $ws1 "1web"
+set $ws2 "2code"
+set $ws3 "3proc"
+set $ws4 "4term"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws8 "8note"
+set $ws9 "9music"
+set $ws10 "10bg_proc"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -125,6 +125,7 @@ bar {
     status_command exec ~/.config/i3/sweet-i3bar/driver.sh
     position bottom
     separator_symbol "/"
+    strip_workspace_numbers yes
 
 		colors{
 			background $cDarkBack
@@ -137,7 +138,7 @@ bar {
 }
 
 # force all windows to have a border
-for_window [class=.*] border pixel 3
+for_window [class=.*] border pixel 1
 default_floating_border normal 2
 hide_edge_borders smart  # hide edge borders in fullscreen mode
 
@@ -155,18 +156,19 @@ client.background                     $cDarkBack
 exec feh --bg-fill /home/*/.config/background*
 # exec xfce4-power-manager
 exec nm-tray
+exec AmneziaVPN
 
 #============BINDINGS============#
 bindsym $mod+d       exec dmenu_run -sf "#000000" -nf "#ffffff" -nb $cDarkBack -sb $cMain -p "EXEC" -b
 bindsym $mod+m       exec python3 ~/.config/i3/dmount/dmount.py
 bindsym $mod+p       exec python3 ~/.config/i3/domodoro/domodoro.py
 bindsym $mod+e       exec node    ~/.config/i3/dascii/dascii.js
-bindsym Print        exec flameshot gui
+bindsym Print        exec flameshot gui -r | xclip -sel clip -t image/png
 bindsym $mod+t       exec alacritty
+# bindsym $mod+F4      exec --no-startup-id python3 ~/scripts/lock-keyboard.py
 bindsym $mod+F2      exec setxkbmap ru
 bindsym $mod+F1      exec setxkbmap us
-
-bindsym F12          nop
+bindsym $mod+x       exec firefox claude.ai
 
 bindsym $mod+Shift+q kill
 
@@ -178,3 +180,7 @@ bindsym $mod+Shift+r restart  # restart i3
 for_window [class="mpv"] fullscreen enable
 
 
+# Or pin it to a specific position:
+# for_window [title="OpenGL"] floating enable, move position 1000 px 100 px
+# Or assign it to a specific workspace
+assign [title="OpenGL"] workspace 3proc
