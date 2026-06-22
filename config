@@ -2,11 +2,11 @@
 
 set $mod Mod4
 
-set $cMain "#ffffff"
-set $cDarkMain "#888888"
-set $cLightBack "#333333"
-set $cBack "#191919"
-set $cDarkBack "#000000"
+set $cMain "#e8a317"
+set $cDarkMain "#e8a317"
+set $cLightBack "#f8b327"
+set $cBack "#dddddd"
+set $cDarkBack "#f9f9f9"
 
 #Define workspaces
 set $ws1 "1web"
@@ -129,25 +129,25 @@ bar {
 
 		colors{
 			background $cDarkBack
-			separator  $cLightBack
+			separator  "#dddddd"
 			#                  outline inside    number
-      focused_workspace  $cMain $cLightBack $cMain
-      active_workspace   $cMain $cBack $cMain
-      inactive_workspace $cBack $cBack $cMain
+      focused_workspace  $cMain $cLightBack "#23292f"
+      active_workspace   $cMain $cDarkBack "#23292f"
+      inactive_workspace $cBack $cDarkBack "#23292f"
 		}
 }
 
 # force all windows to have a border
-for_window [class=.*] border pixel 1
-default_floating_border normal 2
+for_window [class=.*] border pixel 3
+default_floating_border normal 4
 hide_edge_borders smart  # hide edge borders in fullscreen mode
 
 title_align center
 
 #                       textbord      backgr.    text        indicator border
-client.focused          $cMain        $cBack     $cMain      $cMain   $cMain
-client.focused_inactive $cMain        $cBack     $cMain      $cBack   $cBack
-client.unfocused        $cDarkMain    #000000    $cDarkMain  $cBack   $cBack
+client.focused          $cMain        #ffffff     $cMain      $cMain   $cMain
+client.focused_inactive $cMain        #ffffff     $cMain      $cBack   $cBack
+client.unfocused        $cDarkMain    #eeeeee    $cDarkMain  $cBack   $cBack
 client.urgent           #ffff00       #000000    $cLightBack $cBack   #ffff00
 client.placeholder      #aa0000       #000000    $cLightBack $cBack   #ff00ff
 client.background                     $cDarkBack

@@ -16,7 +16,7 @@ def exec(cmd):
 def property(name, value):
   return '"{_name}":"{_value}"'.format(_name = name, _value = value)
 
-def block(text, color = '#ffffff'):
+def block(text, color = '#000000'):
   res = '{'
   res += property('full_text', text)+','+property('color', color)
   res += '}' 
@@ -30,12 +30,12 @@ def time(seconds = False):
 def othertime(seconds = False, offset = 0, title=''):
   now = datetime.now() - timedelta(hours=offset)
   currentTime = now.strftime('%-H:%M' + (':%S' if seconds else ''))
-  return block(f' {title} {currentTime} ', '#aaaaaa')
+  return block(f' {title} {currentTime} ', '#23292f')
 
 def longDate():
   now = datetime.now()
   currentDate = now.strftime('%A, %B %-d  (%-Y-%m-%d)')
-  return block(currentDate, '#ea9635')
+  return block(currentDate, '#23292f')
 
 def user():
   name = getuser()
@@ -47,13 +47,13 @@ def temp():
   temp = int(temp) / 1000
   color = '#ffffff'
   if (temp > 70):
-    color = '#ff0000'
+    color = '#d11149'
   elif (temp > 60):
-    color = '#ffaa00'
+    color = '#b5820a'
   elif (temp > 50):
-    color = '#ffffff'
+    color = '#23292f'
   else:
-    color = '#00ff00'
+    color = '#1a8a3f'
   return block(str(temp) + 'C', color)
 
 def mem():
@@ -61,20 +61,14 @@ def mem():
   total = str(int((mem.total/100000000))/ 10)
   used =  str(int((mem.used/100000000)) / 10)
   percentage = mem.used/mem.total
-  color = '#ffffff'
+  color = '#23292f'
   if (percentage < 0.5):
-    color = '#00ff00'
+    color = '#1a8a3f'
   elif (percentage < 0.8):
-    color = '#ffffff'
+    color = '#23292f'
   else:
-    color = '#ff0000'
+    color = '#d11149'
   return block('RAM ' + used + '/' + total + 'G', color)
-
-def deadline():
-  now = date.today()
-  deadline = date(2029, 4, 6)
-  difference = deadline - now
-  return block(str(difference.days), '#ff0000')
 
 def battery(batteryHealthMode=False):
   acpi = exec('acpi -b')
@@ -93,19 +87,19 @@ def battery(batteryHealthMode=False):
     acpi = acpi_entries[1]
     level = int(re.search(', (\d?\d?\d)%', acpi).group(1))
 
-  color = '#00ff00'
+  color = '#1a8a3f'
   
   #batteryHealthMode keeps the battery level between 20% and 80%
   if (batteryHealthMode):
     if (level < 20 or level > 80):
-      color = '#ff0000'
+      color = '#ff2e6e'
     elif (level < 30):
-      color = '#ffaa00'
+      color = '#e8a317'
   else:
     if (level < 30):
-      color = '#ff0000'
+      color = '#ff2e6e'
     elif (level < 60):
-      color = '#ffaa00'
+      color = '#e8a317'
       
   width = 10
   lvl = int(level/100 * width) + 1
@@ -124,18 +118,17 @@ def domodoro():
   return block(f'{title} {int(elapsed / 60)}:{int(elapsed % 60):>02}', '#ffff00')
   
 blocks = [
-  domodoro(),
+  #domodoro(),
 #  user(), 
   temp(),
   mem(),
   battery(batteryHealthMode=False),
-  longDate(),
   othertime(seconds=False, offset=12, title='us-west'),
   othertime(seconds=False, offset=9, title='us-east'),
   othertime(seconds=False, offset=5, title='utc'),
-  othertime(seconds=False, offset=3, title='fab'),
   othertime(seconds=False, offset=2, title='moscow'),
   time(seconds=False), 
+  longDate(),
 ]
 
 line = ',['
